@@ -9,6 +9,7 @@ import AudioCommon
 /// Runs the entire Qwen3-ASR pipeline on CoreML (Neural Engine + CPU),
 /// eliminating the MLX GPU dependency. Requires macOS 15+ / iOS 18+
 /// for MLState KV cache support.
+@available(macOS 15.0, iOS 18.0, *)
 public class CoreMLASRModel {
     public let encoder: CoreMLASREncoder
     public let decoder: CoreMLTextDecoder
@@ -343,6 +344,7 @@ public class CoreMLASRModel {
 
 // MARK: - SpeechRecognitionModel
 
+@available(macOS 15.0, iOS 18.0, *)
 extension CoreMLASRModel: SpeechRecognitionModel {
     public var inputSampleRate: Int { 16000 }
 
@@ -357,6 +359,7 @@ extension CoreMLASRModel: SpeechRecognitionModel {
 
 // MARK: - Background-Safe Transcription
 
+@available(macOS 15.0, iOS 18.0, *)
 extension CoreMLASRModel {
     /// Background-safe transcription (no MLX/Metal dependency).
     ///

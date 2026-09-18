@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "Qwen3Speech",
     platforms: [
-        .macOS("15.0"),
+        .macOS("14.0"),
         .iOS("18.0")
     ],
     products: [

@@ -29,6 +29,7 @@ import AudioCommon
 /// EnumeratedShapes(T) is **not** ANE-compatible at this layer count,
 /// so the model is fixed-T and we wrap step calls with scratch padding
 /// rather than running a smaller variant.
+@available(macOS 15.0, iOS 18.0, *)
 public class CoreMLTextDecoder {
     private let embeddingModel: MLModel
     private let decoderPart1Model: MLModel

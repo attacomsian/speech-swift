@@ -7,6 +7,7 @@ import os
 
 /// Errors thrown by `SystemAudioTap`. Every case carries the failing `OSStatus`
 /// so callers can report the real Core Audio failure instead of a generic message.
+@available(macOS 14.2, *)
 public enum SystemAudioTapError: Error, LocalizedError {
     case alreadyRunning
     case processTranslationFailed(pid: pid_t, status: OSStatus)
@@ -69,6 +70,7 @@ public enum SystemAudioTapError: Error, LocalizedError {
 /// Audio may still create a working tap that delivers only silence.** Callers
 /// that need to fail closed should watch `framesCaptured` grow while
 /// `nonSilentFrames` stays at zero and surface an explicit status.
+@available(macOS 14.2, *)
 public final class SystemAudioTap {
     /// Capture state, mirroring `AudioIO.MicrophoneState`.
     public enum CaptureState: Sendable {
