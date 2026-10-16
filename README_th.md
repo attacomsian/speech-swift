@@ -73,6 +73,8 @@
 - **[Qwen3Chat](https://soniqo.audio/guides/chat)** — แชท LLM บนอุปกรณ์ (Qwen3.5-0.8B MLX/CoreML พร้อมแบ็กเอนด์ MLX ของ dense Qwen3 4B และ Gemma 4 E2B/E4B, สตรีมมิ่งโทเค็น)
 - **[FunctionGemma](https://soniqo.audio/guides/function-calls)** — LLM บนอุปกรณ์สำหรับการเรียกฟังก์ชัน / เครื่องมือแบบมีโครงสร้าง (Gemma 3 270M, CoreML 8-bit palettize, Neural Engine, ~252 tok/s)
 - **[MADLAD-400](https://soniqo.audio/guides/translate)** — การแปลแบบหลายต่อหลายระหว่างกว่า 400 ภาษา (3B, MLX INT4 + INT8, T5 v1.1, Apache 2.0)
+- **[GLiNER2.5-Decide](https://soniqo.audio/guides/gliner)** - จัดประเภทข้อความตามป้ายกำกับและดึงเอนทิตีบนเครื่อง (encoder DeBERTa-v3-large, MLX, INT8/FP16/FP32; พรีวิวสำหรับการพัฒนา, Apache 2.0)
+- **[Clef-flash](docs/models/clef.md)** — ตัดสินใจบนเครื่องจากข้อความและคำตอบที่อนุญาต (9B, MLX 4 บิต; พรีวิวสำหรับการพัฒนา, Apache 2.0)
 
 **Speech-to-Speech และ voice agents**
 
@@ -102,6 +104,7 @@ Papers: [Qwen3-ASR](https://arxiv.org/abs/2601.21337) (Alibaba) · [Qwen3-TTS](h
 
 ## ข่าวสาร
 
+- **10 ก.ย. 2026** — [NVIDIA Nemotron VoiceChat on Apple Silicon — Full-Duplex Speech With Tools](https://blog.ivan.digital/nvidia-nemotron-voicechat-on-apple-silicon-full-duplex-speech-with-tools-6165625d55c4)
 - **19 เม.ย. 2026** — [MLX vs CoreML on Apple Silicon — A Practical Guide to Picking the Right Backend](https://blog.ivan.digital/mlx-vs-coreml-on-apple-silicon-a-practical-guide-to-picking-the-right-backend-and-why-you-should-f77ddea7b27a)
 - **20 มี.ค. 2026** — [We Beat Whisper Large v3 with a 600M Model Running Entirely on Your Mac](https://blog.ivan.digital/we-beat-whisper-large-v3-with-a-600m-model-running-entirely-on-your-mac-20e6ce191174)
 - **26 ก.พ. 2026** — [Speaker Diarization and Voice Activity Detection on Apple Silicon — Native Swift with MLX](https://blog.ivan.digital/speaker-diarization-and-voice-activity-detection-on-apple-silicon-native-swift-with-mlx-92ea0c9aca0f)
@@ -166,7 +169,7 @@ struct DictateView: View {
 
 `SpeechUI` มาพร้อมเพียง `TranscriptionView` (ผลลัพธ์สุดท้าย + บางส่วน) และ `TranscriptionStore` (อะแดปเตอร์สำหรับ ASR แบบสตรีมมิ่ง) ใช้ AVFoundation สำหรับการแสดงผลภาพเสียงและการเล่นเสียง
 
-ผลิตภัณฑ์ SPM ที่มีให้: `Qwen3ASR`, `WhisperASR`, `MossTranscribe`, `Qwen3TTS`, `Qwen3TTSCoreML`, `ParakeetASR`, `ParakeetStreamingASR`, `NemotronStreamingASR`, `OmnilingualASR`, `CohereTranscribeASR`, `VoxtralASR`, `KokoroTTS`, `SupertonicTTS`, `VibeVoiceTTS`, `CosyVoiceTTS`, `VoxCPM2TTS`, `IndexTTS2TTS`, `F5TTS`, `HiggsTTS`, `ChatterboxTTS`, `OmniVoiceTTS`, `IndicMioTTS`, `FishAudioTTS`, `MagpieTTS`, `MagpieTTSCoreML`, `MAGNeTMusicGen`, `StableAudio3MusicGen`, `FlashSR`, `PersonaPlex`, `VoiceChat`, `CSM`, `Audio2Face3D`, `HibikiTranslate`, `MADLADTranslation`, `SpeechVAD`, `SpeechLanguageID`, `SpeechWakeWord`, `SpeechEnhancement`, `SpeechRestoration`, `SourceSeparation`, `Qwen3Chat`, `FunctionGemma`, `SpeechCore`, `SpeechUI`, `AudioCommon`
+ผลิตภัณฑ์ SPM ที่มีให้: `Qwen3ASR`, `WhisperASR`, `MossTranscribe`, `Qwen3TTS`, `Qwen3TTSCoreML`, `ParakeetASR`, `ParakeetStreamingASR`, `NemotronStreamingASR`, `OmnilingualASR`, `CohereTranscribeASR`, `VoxtralASR`, `KokoroTTS`, `SupertonicTTS`, `VibeVoiceTTS`, `CosyVoiceTTS`, `VoxCPM2TTS`, `IndexTTS2TTS`, `F5TTS`, `HiggsTTS`, `ChatterboxTTS`, `OmniVoiceTTS`, `IndicMioTTS`, `FishAudioTTS`, `MagpieTTS`, `MagpieTTSCoreML`, `MAGNeTMusicGen`, `StableAudio3MusicGen`, `FlashSR`, `PersonaPlex`, `VoiceChat`, `CSM`, `Audio2Face3D`, `HibikiTranslate`, `MADLADTranslation`, `GLiNER`, `Clef`, `SpeechVAD`, `SpeechLanguageID`, `SpeechWakeWord`, `SpeechEnhancement`, `SpeechRestoration`, `SourceSeparation`, `Qwen3Chat`, `FunctionGemma`, `SpeechCore`, `SpeechUI`, `AudioCommon`
 
 ## โมเดล
 
@@ -206,6 +209,8 @@ struct DictateView: View {
 | [Gemma 4 Chat](docs/models/gemma4-chat.md) | Text → Text (LLM) | MLX | E2B / E4B (4-bit) | Multi |
 | [FunctionGemma](docs/models/function-gemma.md) | ข้อความ → การเรียกเครื่องมือ (LLM) | CoreML | 270M | EN |
 | [MADLAD-400](https://soniqo.audio/guides/translate) | ข้อความ → ข้อความ (การแปล) | MLX | 3B | **400+** |
+| [GLiNER2.5-Decide](docs/models/gliner.md) | ข้อความ → ป้ายกำกับ + ช่วงข้อความ (จัดประเภท, ดึงเอนทิตี) | MLX | 340M | EN |
+| [Clef-flash](docs/models/clef.md) | ข้อความ → ความน่าจะเป็นของคำตอบที่อนุญาต | MLX | 9B (4-bit) | ทดสอบภาษาอังกฤษ |
 | [Hibiki Zero-3B](https://soniqo.audio/guides/audio-translate) | เสียงพูด → เสียงพูด (การแปล) | MLX | 3B | FR/ES/PT/DE → EN |
 | [PersonaPlex](https://soniqo.audio/guides/respond) | เสียงพูด → เสียงพูด | MLX | 7B | EN |
 | [VoiceChat 11B](docs/models/voicechat.md) | เสียงพูด → เสียงพูด + ข้อความ | MLX | 11B (INT5 / INT8) | EN |
@@ -216,6 +221,7 @@ struct DictateView: View {
 | [Pyannote](https://soniqo.audio/guides/diarize) | VAD + การแยกผู้พูด | MLX | 1.5M | ไม่จำกัดภาษา |
 | [Pyannote Community-1](https://huggingface.co/aufklarer/Pyannote-Community-1-CoreML) | การแยกผู้พูด + เอ็มเบดดิงผู้พูด | CoreML (ANE) + Swift VBx | 8.35M | ไม่จำกัดภาษา |
 | [Sortformer](https://huggingface.co/aufklarer/Sortformer-Diarization-CoreML) | [การแยกผู้พูด (E2E), สตรีมมิงแบบเพิ่มทีละส่วน](https://soniqo.audio/th/guides/diarize) | CoreML (ANE) | 117M | ไม่จำกัดภาษา |
+| [Nemotron 3](docs/models/nemotron3-diarization.md) | การแยกผู้พูด (สูงสุด 8 คน) | CoreML / MLX (INT8) | 100M | ไม่จำกัดภาษา |
 | [DeepFilterNet3](https://soniqo.audio/guides/denoise) | การปรับปรุงเสียงพูด | CoreML | 2.1M | ไม่จำกัดภาษา |
 | [LocalVQE v1.4-AEC](https://soniqo.audio/th/guides/echo-cancellation) | การตัดเสียงสะท้อนอะคูสติก | CoreML + C++ | 200K + 2,742 | ไม่จำกัดภาษา |
 | [Sidon](https://soniqo.audio/guides/restore) | การฟื้นฟูเสียงพูด (ลดเสียงรบกวน + ลดเสียงก้อง, 48 kHz) | CoreML | w2v-BERT 2.0 + DAC (fp16/int8) | ไม่จำกัดภาษา |
@@ -249,6 +255,8 @@ speech transcribe meeting.wav --engine moss --backend mlx
 speech speak "Hello world"
 speech csm "Nice to meet you" --ref-audio voice.wav --ref-text "reference transcript"
 speech translate "Hello, how are you?" --to es
+speech gliner classify "Remind me to call Dad at six PM." --labels create_reminder,send_message,other
+speech clef decide request.json
 speech respond --input question.wav --transcript
 speech voice-chat
 speech-server --port 8080            # เซิร์ฟเวอร์ HTTP / WebSocket ท้องถิ่น (รองรับ /v1/realtime + /v1/audio/transcriptions ของ OpenAI)
@@ -290,6 +298,7 @@ import MagpieTTSCoreML      // Backend CoreML ของ Magpie (ไฮบริ�
 import FishAudioTTS         // runtime Fish Audio S2 Pro แบบทดลองพร้อมการโคลนเสียง
 import Qwen3Chat            // แชท LLM บนอุปกรณ์
 import FunctionGemma    // LLM บนอุปกรณ์สำหรับการเรียกเครื่องมือ
+import Clef                // ตัดสินใจบนเครื่องจากข้อความ
 import MADLADTranslation    // การแปลแบบหลายต่อหลายระหว่างกว่า 400 ภาษา
 import HibikiTranslate      // การแปลเสียงพูดสู่เสียงพูดแบบสตรีมมิ่ง (FR/ES/PT/DE → EN)
 import PersonaPlex          // เสียงพูดสู่เสียงพูดแบบ full-duplex
@@ -403,6 +412,28 @@ chat.chat(messages: [(.user, "Explain MLX in one sentence")]) { token, isFinal i
     print(token, terminator: "")
 }
 ```
+
+### ตัดสินใจบนเครื่องด้วย Clef-flash
+
+ส่งข้อความและรายการคำตอบให้ Clef โมเดลจะให้คะแนนแต่ละคำตอบเพื่อช่วยให้แอปเลือกขั้นตอนถัดไป รองรับตัวเลือก คำถามจริง/เท็จ และคะแนนตามลำดับ เพิ่มผลิตภัณฑ์ SPM `Clef` เพื่อใช้ไลบรารี
+
+```swift
+import Clef
+
+let model = try await Clef.fromPretrained()
+let result = try model.decide(
+    state: "Please turn the kitchen lights on.",
+    questions: [
+        ClefQuestion(id: "action", instructions: "Which action was requested?",
+            kind: .choice(["on": "Turn lights on", "off": "Turn lights off", "other": "Other request"]))
+    ])
+print(result.decisions[0].selectedOption)
+print(result.decisions[0].probabilities)
+```
+
+ต้องใช้ Apple Silicon และ macOS 15+ การโหลดครั้งแรกดาวน์โหลดประมาณ 5.3 GB และต้องใช้หน่วยความจำเพิ่มเติมขณะทำงาน โหลดอินสแตนซ์เดียวไว้และเรียกใช้งานตามลำดับ
+
+[โมเดล](https://huggingface.co/aufklarer/Clef-flash-9B-MLX-4bit) · [การใช้งาน](docs/inference/clef.md) · [ผลวัดเวลาแฝงและหน่วยความจำ](docs/benchmarks/clef.md)
 
 ### การแปล — [คู่มือฉบับเต็ม →](https://soniqo.audio/guides/translate)
 
@@ -527,7 +558,7 @@ speech-swift ถูกแบ่งเป็นหนึ่ง SPM target ต่�
 **[แผนภาพสถาปัตยกรรมฉบับเต็มพร้อม backends ตารางหน่วยความจำ และแผนผังโมดูล → soniqo.audio/architecture](https://soniqo.audio/architecture)** · **[API reference → soniqo.audio/api](https://soniqo.audio/api)** · **[Benchmarks → soniqo.audio/benchmarks](https://soniqo.audio/benchmarks)**
 
 เอกสารในเครื่อง (repo):
-- **โมเดล:** [Qwen3-ASR](docs/models/asr-model.md) · [WhisperASR](docs/models/whisper-asr.md) · [MOSS Transcribe Diarize](docs/models/moss-transcribe-diarize.md) · [Qwen3-TTS](docs/models/tts-model.md) · [CosyVoice](docs/models/cosyvoice-tts.md) · [Kokoro](docs/models/kokoro-tts.md) · [VoxCPM2](docs/models/voxcpm2-tts.md) · [IndexTTS2](docs/models/indextts2.md) · [F5-TTS](docs/models/f5-tts.md) · [Higgs TTS 3](docs/models/higgs-tts.md) · [VibeVoice](docs/models/vibevoice.md) · [Supertonic](docs/models/supertonic-tts.md) · [Chatterbox](docs/models/chatterbox-tts.md) · [Indic-Mio](docs/models/indic-mio-tts.md) · [Fish Audio S2 Pro](docs/models/fish-audio-s2-pro.md) · [Magpie TTS](docs/models/magpie-tts.md) · [Parakeet TDT](docs/models/parakeet-asr.md) · [Parakeet Streaming](docs/models/parakeet-streaming-asr.md) · [Nemotron Streaming](docs/models/nemotron-asr-streaming.md) · [Omnilingual ASR](docs/models/omnilingual-asr.md) · [PersonaPlex](docs/models/personaplex.md) · [VoiceChat](docs/models/voicechat.md) · [CSM](docs/models/csm.md) · [Hibiki](docs/models/hibiki.md) · [MADLAD-400](docs/models/madlad-translation.md) · [FunctionGemma](docs/models/function-gemma.md) · [Qwen3.5 Chat](docs/models/qwen35-chat.md) · [Gemma 4 Chat](docs/models/gemma4-chat.md) · [Qwen3 Dense Chat](docs/models/qwen3-dense-chat.md) · [FireRedVAD](docs/models/fireredvad.md) · [Smart Turn v3.2](docs/models/smart-turn-v3.md) · [KWS Zipformer](docs/models/kws-zipformer.md) · [Sidon](docs/models/sidon.md) · [Source Separation](docs/models/source-separation.md) · [HTDemucs](docs/models/htdemucs.md) · [MAGNeT](docs/models/magnet-music-gen.md) · [Stable Audio 3](docs/models/stable-audio-3.md) · [FlashSR](docs/models/flashsr.md) · [Audio2Face-3D](docs/models/audio2face3d.md)
+- **โมเดล:** [Qwen3-ASR](docs/models/asr-model.md) · [WhisperASR](docs/models/whisper-asr.md) · [MOSS Transcribe Diarize](docs/models/moss-transcribe-diarize.md) · [Qwen3-TTS](docs/models/tts-model.md) · [CosyVoice](docs/models/cosyvoice-tts.md) · [Kokoro](docs/models/kokoro-tts.md) · [VoxCPM2](docs/models/voxcpm2-tts.md) · [IndexTTS2](docs/models/indextts2.md) · [F5-TTS](docs/models/f5-tts.md) · [Higgs TTS 3](docs/models/higgs-tts.md) · [VibeVoice](docs/models/vibevoice.md) · [Supertonic](docs/models/supertonic-tts.md) · [Chatterbox](docs/models/chatterbox-tts.md) · [Indic-Mio](docs/models/indic-mio-tts.md) · [Fish Audio S2 Pro](docs/models/fish-audio-s2-pro.md) · [Magpie TTS](docs/models/magpie-tts.md) · [Parakeet TDT](docs/models/parakeet-asr.md) · [Parakeet Streaming](docs/models/parakeet-streaming-asr.md) · [Nemotron Streaming](docs/models/nemotron-asr-streaming.md) · [Omnilingual ASR](docs/models/omnilingual-asr.md) · [PersonaPlex](docs/models/personaplex.md) · [VoiceChat](docs/models/voicechat.md) · [CSM](docs/models/csm.md) · [Hibiki](docs/models/hibiki.md) · [MADLAD-400](docs/models/madlad-translation.md) · [GLiNER](docs/models/gliner.md) · [Clef-flash](docs/models/clef.md) · [FunctionGemma](docs/models/function-gemma.md) · [Qwen3.5 Chat](docs/models/qwen35-chat.md) · [Gemma 4 Chat](docs/models/gemma4-chat.md) · [Qwen3 Dense Chat](docs/models/qwen3-dense-chat.md) · [FireRedVAD](docs/models/fireredvad.md) · [Smart Turn v3.2](docs/models/smart-turn-v3.md) · [KWS Zipformer](docs/models/kws-zipformer.md) · [Sidon](docs/models/sidon.md) · [Source Separation](docs/models/source-separation.md) · [HTDemucs](docs/models/htdemucs.md) · [MAGNeT](docs/models/magnet-music-gen.md) · [Stable Audio 3](docs/models/stable-audio-3.md) · [FlashSR](docs/models/flashsr.md) · [Audio2Face-3D](docs/models/audio2face3d.md)
 - **การอนุมาน:** [Qwen3-ASR](docs/inference/qwen3-asr-inference.md) · [WhisperASR](docs/inference/whisper-asr-inference.md) · [MOSS Transcribe Diarize](docs/inference/moss-transcribe-diarize.md) · [Parakeet TDT](docs/inference/parakeet-asr-inference.md) · [Parakeet Streaming](docs/inference/parakeet-streaming-asr-inference.md) · [Nemotron Streaming](docs/inference/nemotron-asr-streaming.md) · [Omnilingual ASR](docs/inference/omnilingual-asr-inference.md) · [TTS](docs/inference/qwen3-tts-inference.md) · [VoxCPM2](docs/inference/voxcpm2-inference.md) · [IndexTTS2](docs/inference/indextts2.md) · [F5-TTS](docs/inference/f5-tts.md) · [Higgs TTS 3](docs/inference/higgs-tts.md) · [VibeVoice](docs/inference/vibevoice-inference.md) · [Fish Audio S2 Pro](docs/inference/fish-audio-s2-pro.md) · [Magpie TTS](docs/inference/magpie-tts.md) · [CSM](docs/inference/csm.md) · [Hibiki](docs/inference/hibiki-inference.md) · [MADLAD-400](docs/inference/madlad-translation.md) · [MAGNeT](docs/inference/magnet-music-gen.md) · [Stable Audio 3](docs/inference/stable-audio-3.md) · [FlashSR](docs/inference/flashsr.md) · [Forced Aligner](docs/inference/forced-aligner.md) · [Silero VAD](docs/inference/silero-vad.md) · [Smart Turn](docs/inference/smart-turn.md) · [FireRedVAD](docs/inference/fireredvad.md) · [Wake-word](docs/inference/wake-word.md) · [Speaker Diarization](docs/inference/speaker-diarization.md) · [Speech Enhancement](docs/inference/speech-enhancement.md) · [Sidon](docs/inference/sidon.md) · [Cache/offline](docs/inference/cache-and-offline.md)
 - **การตัดเสียงสะท้อน:** [LocalVQE AEC](docs/inference/echo-cancellation.md)
 - **อ้างอิง:** [Shared Protocols](docs/shared-protocols.md)
